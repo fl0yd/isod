@@ -39,7 +39,7 @@ func genisoimageHandler(w http.ResponseWriter, r *http.Request) {
 	defer os.RemoveAll(tmpdir)
 	io.Copy(f, io.LimitReader(r.Body, 10000))
 	f.Close()
-	cmd := exec.Command("/usr/bin/genisoimage", "-R", "-V", "config-2", tmpdir)
+	cmd := exec.Command("/usr/bin/genisoimage", "-R", "-V", "-J", "config-2", tmpdir)
 	var iso bytes.Buffer
 	cmd.Stdout = &iso
 	err = cmd.Run()
